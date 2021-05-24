@@ -52,9 +52,6 @@ class PlayState extends MusicBeatState
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
-
-	var halloweenLevel:Bool = false;
-
 	private var vocals:FlxSound;
 
 	private var dad:Character;
@@ -95,7 +92,6 @@ class PlayState extends MusicBeatState
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 
 	var halloweenBG:FlxSprite;
-	var isHalloween:Bool = false;
 
 	var phillyCityLights:FlxTypedGroup<FlxSprite>;
 	var phillyTrain:FlxSprite;
@@ -232,8 +228,6 @@ class PlayState extends MusicBeatState
                         case 'spookeez' | 'monster' | 'south': 
                         {
                                 curStage = 'spooky';
-	                          halloweenLevel = true;
-
 		                  var hallowTex = Paths.getSparrowAtlas('halloween_bg');
 
 	                          halloweenBG = new FlxSprite(-200, -100);
@@ -243,8 +237,6 @@ class PlayState extends MusicBeatState
 	                          halloweenBG.animation.play('idle');
 	                          halloweenBG.antialiasing = true;
 	                          add(halloweenBG);
-
-		                  isHalloween = true;
 		          }
 		          case 'pico' | 'blammed' | 'philly': 
                         {
@@ -2459,7 +2451,7 @@ class PlayState extends MusicBeatState
 				}
 		}
 
-		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
+		if (curStage == 'spooky' && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
 		{
 			lightningStrikeShit();
 		}
